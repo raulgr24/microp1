@@ -13,29 +13,24 @@ xNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 <div class = 'class_comanda'>
 <h2 class = "titulo"> Mesón Gallego </h2>
-<form class = "clasform1">
+<form class = "clasform1" #f='ngForm'>
 <br/>
 <label> Consumicion: </label>
-<select name = 'lstConsumicion'>
+<select name = 'lstConsumicion' [(ngModel)]='codProducto'>
+    <option *ngFor='let prod of productos; let i=index' value='{{i}}'>{{prod[0]}} ({{prod[1]}} €)</option>
 </select>
-<button type = "button"> + </button>
+<button type = "button" (click)='addLinea()'> + </button>
 </form>
 <br/>
 <h3> Consumiciones: </h3>
 <table width = "450px">
 <thead>
-<td>
-<u> Producto </u>
-</td>
-<td align = "right">
-<u> Precio </u>
-</td>
+    <td><u> Producto </u></td><td align = "right"><u> Precio </u></td>
 </thead>
-<tr>
-<td></td>
-<td align = "right"></td>
-<td align = "center">
-<button type = "button"> - </button>
+<tr *ngFor='let linea of lineas;let i=index'>
+<td>{{linea[0]}}</td>
+<td align = "right">{{linea[1]}}€</td><td align = "center">
+<button type = "button" (click)='delLinea(i)'> - </button>
 </td>
 </tr>
 <tr>
@@ -43,7 +38,7 @@ xNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 <b> TOTAL </b>
 </td>
 <td align = "right">
-<b></b>
+<b>{{importe}}€</b>
 </td>
 </tr>
 </table>
